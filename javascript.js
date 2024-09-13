@@ -1,64 +1,60 @@
 $(document).ready(function () {
-    $(window).scroll(function () {
-      //  sticky navbar on scroll script  //
-      if (this.scrollY > 20) {
-        $(".navbar").addClass("sticky");
-      } else {
-        $(".navbar").removeClass("sticky");
-      }
-  
-      //  scroll-up button show/hide script  //
-      if (this.scrollY > 500) {
-        $(".scroll-up-btn").addClass("show");
-      } else {
-        $(".scroll-up-btn").removeClass("show");
-      }
-    });
-  
-    //  slide-up script  //
-  
-    $(".scroll-up-btn").click(function () {
-      $("html").animate({ scrollTop: 0 });
-      //  removing smooth scroll on slide-up button click  //
-      $("html").css("scrollBehavior", "auto");
-    });
-  
-    $(".navbar .menu li a").click(function () {
-      //  Smooth scroll on Menu Items click  //
-  
-      $("html").css("scrollBehavior", "smooth");
-    });
-  
-    //  Toggle Navbar  //
-  
-    $(".menu-btn").click(function () {
-      $(".navbar .menu").toggleClass("active");
-      $(".menu-btn i").toggleClass("active");
-    });
-  
-    //  Typing Text Animation  //
-  
-    var typed = new Typed(".typing", {
-      strings: [
-        "Frontend Developer"
-      ],
-      typeSpeed: 100,
-      backSpeed: 60,
-      loop: true
-    });
-  
-    var typed = new Typed(".typing-2", {
-      strings: [
-        "Frontend Developer",
-        
-      ],
-      typeSpeed: 100,
-      backSpeed: 60,
-      loop: true
-    });
-  
-  //Submitt form
-  
+  // Sticky Navbar on Scroll
+  $(window).scroll(function () {
+    if ($(this).scrollTop() > $('#about').offset().top - 20) {
+      $(".navbar").addClass("sticky");
+      $(".logo").show(); // Show logo when navbar is sticky
+    } else {
+      $(".navbar").removeClass("sticky");
+      $(".logo").hide(); // Hide logo when not sticky
+    }
+
+    // Scroll-up Button Show/Hide
+    if ($(this).scrollTop() > 500) {
+      $(".scroll-up-btn").addClass("show");
+    } else {
+      $(".scroll-up-btn").removeClass("show");
+    }
+  });
+
+  // Slide-up Script
+  $(".scroll-up-btn").click(function () {
+    $("html").animate({ scrollTop: 0 });
+    $("html").css("scrollBehavior", "auto");
+  });
+
+  // Smooth Scroll on Menu Items Click
+  $(".navbar .menu li a").click(function () {
+    var target = $(this).attr("href");
+    $("html, body").animate({
+      scrollTop: $(target).offset().top
+    }, 1000);
+    $(".navbar .menu").removeClass('active');
+    $(".menu-btn i").removeClass('active');
+  });
+
+  // Toggle Menu on Menu Button Click
+  $(".menu-btn").click(function () {
+    $(".navbar .menu").toggleClass("active");
+    $(".menu-btn i").toggleClass("active");
+  });
+
+  // Typing Text Animation
+  new Typed(".typing", {
+    strings: ["Frontend Developer"],
+    typeSpeed: 100,
+    backSpeed: 60,
+    loop: true,
+  });
+
+  new Typed(".typing-2", {
+    strings: ["Frontend Developer"],
+    typeSpeed: 100,
+    backSpeed: 60,
+    loop: true,
+  });
+
+  // Submit Form
   $("#emailForm").on("submit", function (event) {
     event.preventDefault();
 
@@ -72,32 +68,37 @@ $(document).ready(function () {
 
     window.open(`https://mail.google.com/mail/?view=cm&fs=1&to=niveditakamtar@gmail.com&su=${emailSubject}&body=${emailBody}`, "_blank");
   });
-  
-  
-  
-  
-  
-    //  Owl Carousel  //
-  
-    $(".carousel").owlCarousel({
-      margin: 20,
-      loop: true,
-      autoplay: true,
-      autoplayTimeOut: 2000,
-      autoplayHoverPause: true,
-      responsive: {
-        0: {
-          items: 1,
-          nav: false
-        },
-        600: {
-          items: 2,
-          nav: false
-        },
-        1000: {
-          items: 3,
-          nav: false
-        }
-      }
-    });
+
+  // Owl Carousel Initialization
+  $(".owl-carousel").owlCarousel({
+    loop: true,
+    margin: 20,
+    nav: true,
+    dots: true,
+    autoplay: true,
+    autoplayTimeout: 2000,
+    autoplayHoverPause: true,
+    responsive: {
+      0: {
+        items: 1,
+      },
+      600: {
+        items: 2,
+      },
+      1000: {
+        items: 3,
+      },
+    },
   });
+});
+
+window.addEventListener('DOMContentLoaded', (event) => {
+  const navbar = document.querySelector('.navbar'); // Get the navbar element
+  window.onscroll = () => {
+    if (window.scrollY > 50) { // If the user scrolls more than 50 pixels
+      navbar.classList.add('scrolled'); // Add 'scrolled' class to navbar
+    } else {
+      navbar.classList.remove('scrolled'); // Remove 'scrolled' class from navbar
+    }
+  };
+});
