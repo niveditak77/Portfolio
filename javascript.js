@@ -40,9 +40,7 @@ $(document).ready(function () {
   
     var typed = new Typed(".typing", {
       strings: [
-        "Core Java",
-        "MySQL",
-        "Full Stack Web-Development"
+        "Frontend Developer"
       ],
       typeSpeed: 100,
       backSpeed: 60,
@@ -51,8 +49,8 @@ $(document).ready(function () {
   
     var typed = new Typed(".typing-2", {
       strings: [
-        "Java Developer",
-        "Full Stack Web-Development"
+        "Frontend Developer",
+        
       ],
       typeSpeed: 100,
       backSpeed: 60,
@@ -61,16 +59,19 @@ $(document).ready(function () {
   
   //Submitt form
   
-  document.getElementById("emailForm").onsubmit = function (event) {
+  $("#emailForm").on("submit", function (event) {
     event.preventDefault();
-    const name = document.getElementById("name").value;
-    const email = document.getElementById("email").value;
-    const subject = document.getElementById("subject").value;
-    const message = document.getElementById("message").value;
-    const emailBody = `Hi Nivedita, ${message}`;
-    const emailSubject = `PORTFILIO - ${subject}`;
-    window.location.href = `mailto:niveditakamtar@gmail.com=${emailSubject}&body=${emailBody}`;
-  };
+
+    const name = $("#name").val();
+    const email = $("#email").val();
+    const subject = $("#subject").val();
+    const message = $("#message").val();
+
+    const emailBody = encodeURIComponent(`Hi Nivedita,\n\n${message}\n\nRegards,\n${name}`);
+    const emailSubject = encodeURIComponent(subject);
+
+    window.open(`https://mail.google.com/mail/?view=cm&fs=1&to=niveditakamtar@gmail.com&su=${emailSubject}&body=${emailBody}`, "_blank");
+  });
   
   
   
